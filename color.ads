@@ -1,0 +1,22 @@
+package Terminal.Color is
+   type Bytes is array (Integer range <>) of Integer;
+   Black : Bytes := (27, 91, 51, 48);
+   Red : Bytes := (27, 91, 51, 49);
+   Green : Bytes := (27, 91, 51, 50);
+   Yellow : Bytes := (27, 91, 51, 51);
+   Blue : Bytes := (27, 91, 51, 52);
+   Violet : Bytes := (27, 91, 51, 53);
+   Cyan : Bytes := (27, 91, 51, 54);
+   White : Bytes := (27, 91, 51, 55);
+   Light_Black : Bytes := (27, 91, 57, 48);
+   Light_Red : Bytes := (27, 91, 57, 49);
+   Light_Green : Bytes := (27, 91, 57, 50);
+   Light_Yellow : Bytes := (27, 91, 57, 51);
+   Light_Blue : Bytes := (27, 91, 57, 52);
+   Light_Violet : Bytes := (27, 91, 57, 53);
+   Light_Cyan : Bytes := (27, 91, 57, 54);
+   Light_White : Bytes := (27, 91, 57, 55);
+   procedure Apply (Color : Bytes := White);
+   function Code (Color : Bytes := White) return String;
+   function "+" (Color : Bytes) return String;
+end Terminal.Color;
