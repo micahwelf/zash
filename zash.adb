@@ -59,7 +59,7 @@ procedure Zash is
                );
    end Put_Help;
 
-   procedure Put_Prompt (Date_Format : String := "%Y-%m-%d ";
+   procedure Put_Prompt (Date_Format    : String := "%Y-%m-%d ";
                          Show_Directory : Boolean := True)
    is
       use GNAT.Calendar.Time_IO;
@@ -100,14 +100,14 @@ procedure Zash is
          Time_Zone  => 0);
 
       return Time_Of
-          (Year       => U_Year,
-           Month      => U_Month,
-           Day        => U_Day,
-           Hour       => U_Hour,
-           Minute     => U_Minute,
-           Second     => U_Second,
-           Sub_Second => U_Duration,
-           Time_Zone  => UTC_Time_Offset);
+        (Year       => U_Year,
+         Month      => U_Month,
+         Day        => U_Day,
+         Hour       => U_Hour,
+         Minute     => U_Minute,
+         Second     => U_Second,
+         Sub_Second => U_Duration,
+         Time_Zone  => UTC_Time_Offset);
    end Unix_Time;
 
    function Is_Interactive_Terminal return Boolean
@@ -138,19 +138,19 @@ procedure Zash is
    Env_Wayland_Display : String := Env.Value ("WAYLAND_DISPLAY", "wayland-0");
 
    package Action_Full is new Containers.Indefinite_Vectors (Natural, String);
---     type Statement is new Action_Full.Vector with record
---        null;
---     end record;
+   --     type Statement is new Action_Full.Vector with record
+   --        null;
+   --     end record;
 
    package Action_Arguments is new Containers.Indefinite_Vectors (Positive, String);
---     type Arguments is new  Action_Arguments.Vector with record
---        null;
---     end record;
+   --     type Arguments is new  Action_Arguments.Vector with record
+   --        null;
+   --     end record;
 
    package Action_List is new Containers.Vectors (Positive, Action_Full.Vector);
---     type Statement_List is new Action_List.Vector with record
---        null;
---     end record;
+   --     type Statement_List is new Action_List.Vector with record
+   --        null;
+   --     end record;
 
 
    type Control_Kind is (Control_With_If,
@@ -175,10 +175,10 @@ procedure Zash is
          null;
       else
          declare
-            Command : String := Argv (0);
+            Command          : String := Argv (0);
             Resolved_Command : String_Access :=
               Locate_Exec_On_Path (Command);
-            Arguments : Argument_List (1 .. Integer (Argv.Last_Index));
+            Arguments        : Argument_List (1 .. Integer (Argv.Last_Index));
          begin
 
             for N in Arguments'Range
@@ -210,8 +210,8 @@ procedure Zash is
       end if;
    end;
 
---   procedure Free is new Ada.Unchecked_Deallocation (Object => String,
---                                                     Name   => GNAT.OS_Lib.String_Access);
+   --   procedure Free is new Ada.Unchecked_Deallocation (Object => String,
+   --                                                     Name   => GNAT.OS_Lib.String_Access);
 
    String_Quotation_Mismatch : exception;
    Command_Not_Found         : exception;
@@ -233,7 +233,7 @@ procedure Zash is
    -- expansions should either complete, or be completed. Functionality
    -- of expansions is thus limited, but very fast.
    function Parse_Statement (S : String)
-                                      return Action_Full.Vector
+                                return Action_Full.Vector
    is
       use Ada.Characters.Latin_1;
 
@@ -253,11 +253,11 @@ procedure Zash is
       R        : Action_Full.Vector;
       -- Return Action Statement (0 => Command, 1 .. inf => Arguments)
 
-      E : Action_Full.Vector;
+      E        : Action_Full.Vector;
       -- Empty Return Statement, never assigned to;
 
       package Mode_Context is new Containers.Vectors (Positive, Parse_Mode);
-      Context : Mode_Context.Vector;
+      Context  : Mode_Context.Vector;
 
       -- Give the most recent parsing mode or the default original mode.
       function Current_Mode return Parse_Mode is
@@ -353,7 +353,7 @@ procedure Zash is
                      Next;
                      if C = S'Last
                      then
-                          null;
+                        null;
                      elsif S (C + 1) = '"'
                      then
                         Append ('"');
@@ -393,6 +393,7 @@ procedure Zash is
 
 
 begin
+
    if Is_Interactive_Terminal
    then
       Put_Line ("Hello, Welcome to Zash, a Z-inspired Ada-founded scripting shell");
@@ -420,31 +421,31 @@ begin
    end loop;
 
 
---
---     Launch_Arguments (1) := new String'("--profile-directory=" & Profile);
---     Launch_Arguments (2) := new String'("--new-window");
---
---     Launch_Arguments (3) := new String'("--app-id=" & App_ID);
---
---     for N in 1 .. Argument_Count loop
---        Launch_Arguments (N+2) := new String'(Argument (N));
---     end loop;
---     -- Simply copy/convey all arguments to the new command launch.
---
---     --Put_Line (Launch_Name);
---     -- DEBUG ACTION - remove this statement when the performance is sufficient.
---
---
---     Spawn (Launch_Name, Launch_Arguments, Launch_Status);
---     -- Launch the new process with conveyed arguments and capture general
---     -- return status as Success or Failure.  A number may be used in the future.
---
---     if not Launch_Status
---     then
---        Set_Exit_Status (Failure);
---     else
---        Set_Exit_Status (Success);
---     end if;
---     --Give return status back to calling os/environment.
+   --
+   --     Launch_Arguments (1) := new String'("--profile-directory=" & Profile);
+   --     Launch_Arguments (2) := new String'("--new-window");
+   --
+   --     Launch_Arguments (3) := new String'("--app-id=" & App_ID);
+   --
+   --     for N in 1 .. Argument_Count loop
+   --        Launch_Arguments (N+2) := new String'(Argument (N));
+   --     end loop;
+   --     -- Simply copy/convey all arguments to the new command launch.
+   --
+   --     --Put_Line (Launch_Name);
+   --     -- DEBUG ACTION - remove this statement when the performance is sufficient.
+   --
+   --
+   --     Spawn (Launch_Name, Launch_Arguments, Launch_Status);
+   --     -- Launch the new process with conveyed arguments and capture general
+   --     -- return status as Success or Failure.  A number may be used in the future.
+   --
+   --     if not Launch_Status
+   --     then
+   --        Set_Exit_Status (Failure);
+   --     else
+   --        Set_Exit_Status (Success);
+   --     end if;
+   --     --Give return status back to calling os/environment.
 
 end Zash;

@@ -1,3 +1,4 @@
+pragma Ada_2012;
 with Ada; use Ada;
 with Ada.Text_IO;
 with Ada.Text_IO.Text_Streams;
