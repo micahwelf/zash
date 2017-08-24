@@ -1,5 +1,11 @@
-# Object file
-*.o
-
-# Ada Library Information
+*.stderr
+*.stdout
 *.ali
+*.a
+*.o
+*~*.*
+.#*#
+.????:???:??:??*
+*-loc.xml
+gnatinspect.db*
+*.cgpr
